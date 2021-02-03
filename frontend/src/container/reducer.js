@@ -3,20 +3,20 @@ import * as types from "./types";
 
 export const INITIAL_STATE = {
   theme: "dark",
-  token: "j",
+  token: "s",
   user: {
-    user_name: "Raghav Kattel",
-    id: 22
+    user_name: "",
+    role: "admin",
+    id: 22,
   },
   client: {
-    client_name: "Raghav Co.",
+    client_name: "",
     client_id: 22,
-    unauthorized: []
-  }
+  },
 };
 
 const reducer = (state = INITIAL_STATE, { type, payload }) =>
-  produce(state, draft => {
+  produce(state, (draft) => {
     switch (type) {
       case types.SET_THEME:
         draft.theme = payload;

@@ -8,7 +8,6 @@ import { PublicRoute, PageNotFound } from "./components";
 // import { Login } from "./guest";
 import LayoutContainer from "../components/layout/LayoutContainer";
 import { selectToken } from "./selectors";
-import "antd/dist/antd.css";
 
 import { Dashboard } from "./protected";
 const AppContainer = ({ token, getUser }) => {

@@ -1,136 +1,148 @@
 import React, { useState } from "react";
-import { Layout, Menu, Affix, Card } from "antd";
+import { Layout, Menu, Card } from "antd";
 import { Link } from "@reach/router";
 import { menuItems } from "./menuItems";
 
 const { Sider, Header, Content } = Layout;
 const { SubMenu } = Menu;
 
-const SideBar = ({ children }) => {
+const SideBar = ({ children, user }) => {
+  const [collapsed, setCollapsed] = useState(false);
+  const [broken, setBroken] = useState(false);
+
   const onCollapse = (collapsed) => {
     setCollapsed(collapsed);
   };
 
-  const [collapsed, setCollapsed] = useState(false);
+  const onBreakpoint = (broken) => {
+    setBroken(broken);
+  };
 
-  const menuRender = () => {
-    return menuItems.map((menu, menuIndex) => {
+  const handleAuth = (role) => {
+    // const roles = ["user", "admin", "super-admin"];
+    let isAuthorized = role.includes(user.role);
+    return isAuthorized;
+  };
+
+  const menuRender = () =>
+    menuItems.map((menu, menuIndex) => {
       if (menu.children == null) {
         return (
           <Menu.Item key={`${menu.title}-${menuIndex}-no-child`}>
-            <Link to={`${menu.link}`}>{collapsed && menu.title}</Link>
+            <Link to={`${menu.link}`}>
+              {menu?.authority && handleAuth(menu.authority) && (
+                <>
+                  {" "}
+                  {menu?.icon}
+                  {menu?.title}
+                </>
+              )}
+            </Link>
           </Menu.Item>
         );
       } else {
-        return (
-          <SubMenu
-            key={`${menu.title}-${menuIndex}-with-child`}
-            title={menu.title}
-          >
-            {menu.children.map((subMenu, subMenuIndex) => {
-              if (subMenu.children == null) {
-                return (
-                  <Menu.Item
-                    key={`${menu.title}-submenu-${subMenu.title}-no-child`}
-                  >
-                    <Link to={`${subMenu.link}`}>{subMenu.title}</Link>
-                  </Menu.Item>
-                );
-              } else {
-                return (
-                  <SubMenu
-                    key={`${menu.title}-${subMenu.title}-submenu-with-child-${subMenuIndex}`}
-                    title={subMenu.title}
-                  >
-                    {subMenu.children.map((subSubMenu, subSubMenuIndex) => {
-                      if (subSubMenu.children == null) {
-                        return (
-                          <Menu.Item
-                            key={`${subSubMenu.title}-${subSubMenuIndex}-subsubmenu-no-child`}
-                          >
-                            <Link to={`${subSubMenu.link}`}>
-                              {subSubMenu.title}
-                            </Link>
-                          </Menu.Item>
-                        );
-                      } else {
-                        return (
-                          <SubMenu
-                            key={`subSubmenu-with-child-${subSubMenu.title}-${subSubMenuIndex}-with-child`}
-                          >
-                            {subSubMenu.title}
-                          </SubMenu>
-                        );
-                      }
-                    })}
-                  </SubMenu>
-                );
+        if (menu?.authority && handleAuth(menu.authority))
+          return (
+            <SubMenu
+              key={`${menu.title}-${menuIndex}-with-child`}
+              title={
+                menu?.authority &&
+                handleAuth(menu.authority) && (
+                  <span>
+                    {menu?.icon}
+                    {menu.title}
+                  </span>
+                )
               }
-            })}
-          </SubMenu>
-        );
+            >
+              {menu.children.map((subMenu, subMenuIndex) => {
+                if (subMenu.children == null) {
+                  if (subMenu?.authority && handleAuth(subMenu.authority))
+                    return (
+                      <Menu.Item
+                        key={`${menu.title}-submenu-${subMenu.title}-no-child`}
+                      >
+                        <Link to={`${subMenu.link}`}>
+                          {/* {subMenu?.authority && handleAuth(subMenu.authority) && ( */}
+                          <>
+                            {" "}
+                            {subMenu?.icon}
+                            {subMenu.title}
+                          </>
+                          {/* )} */}
+                        </Link>
+                      </Menu.Item>
+                    );
+                } else {
+                  if (subMenu?.authority && handleAuth(subMenu.authority))
+                    return (
+                      <SubMenu
+                        key={`${menu.title}-${subMenu.title}-submenu-with-child-${subMenuIndex}`}
+                        title={subMenu.title}
+                      >
+                        {subMenu.children.map((subSubMenu, subSubMenuIndex) => {
+                          if (subSubMenu.children == null) {
+                            return (
+                              <Menu.Item
+                                key={`${subSubMenu.title}-${subSubMenuIndex}-subsubmenu-no-child`}
+                              >
+                                <>
+                                  <Link to={`${subSubMenu.link}`}>
+                                    {subSubMenu?.icon}
+                                    {subSubMenu.title}
+                                  </Link>
+                                </>
+                              </Menu.Item>
+                            );
+                          } else {
+                            if (
+                              subSubMenu?.authority &&
+                              handleAuth(subSubMenu.authority)
+                            )
+                              return (
+                                <SubMenu
+                                  key={`subSubmenu-with-child-${subSubMenu.title}-${subSubMenuIndex}-with-child`}
+                                >
+                                  {subSubMenu?.authority &&
+                                    handleAuth(subSubMenu.authority) && (
+                                      <>{subSubMenu.title}</>
+                                    )}
+                                </SubMenu>
+                              );
+                          }
+                        })}
+                      </SubMenu>
+                    );
+                }
+              })}
+            </SubMenu>
+          );
       }
     });
-  };
 
   return (
     <>
-      {window.innerWidth > 578 ? (
-        <Sider
-          className="sider-class"
-          // collapsedWidth={"20vh"}
-          collapsible
-          collapsed={collapsed}
-          onCollapse={onCollapse}
-        >
-          <Menu theme="dark" defaultSelectedKeys={["1"]} mode="inline">
-            <div
-              style={{
-                margin: "13px 0 13px 0",
-                padding: "20px",
-                fontSize: "27px",
-                // fontWeight: "bold",
-                color: "white",
-              }}
-            >
-              <Link
-                style={{
-                  fontSize: "27px",
-                  color: "white",
-                }}
-                to="/"
-              >
-                {/* {this.props.client.client_name} */}
-              </Link>
-            </div>
+      <Sider
+        breakpoint={"lg"}
+        collapsedWidth="0"
+        onBreakpoint={onBreakpoint}
+        // width={broken ? "90%" : "15%"}
+        collapsible={window.innerWidth < 460}
+        collapsed={collapsed}
+        onCollapse={onCollapse}
+      >
+        <Menu defaultSelectedKeys={["1"]} mode="inline">
+          {menuRender()}
+        </Menu>
+      </Sider>
 
-            {menuRender()}
-          </Menu>
-        </Sider>
-      ) : (
-        <Affix>
-          <Menu
-            style={{ width: "100%" }}
-            theme="dark"
-            defaultSelectedKeys={["1"]}
-            mode="horizontal"
-          >
-            {menuRender()}
-          </Menu>
-        </Affix>
-      )}
-
-      <Layout className="site-layout">
-        <Header className="site-layout-background" style={{ padding: 0 }}>
-          {/* <NavBar user={this.props.user} /> */}
-        </Header>
+      <Layout>
+        <Header>{/* <NavBar user={this.props.user} /> */}</Header>
 
         <Content style={{ margin: "1rem" }}>
-          <Card className="layout-card">{children}</Card>{" "}
+          <Card>{children}</Card>
         </Content>
-        {/* <Layout.Footer style={{ textAlign: "center" }}>
-            2020 Raghav Kattel
-          </Layout.Footer> */}
+        <Layout.Footer style={{ textAlign: "center" }}>© 2021</Layout.Footer>
       </Layout>
     </>
   );

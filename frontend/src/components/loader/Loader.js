@@ -1,7 +1,5 @@
 import React from "react";
 import { ErrorBoundary } from "../index";
-import "./loader.css";
-import video from "./2.mp4";
 
 const Loader = () => (
   <ErrorBoundary>
@@ -13,9 +11,6 @@ const Loader = () => (
         borderRadius: 20,
       }}
     >
-      <video playsInline autoPlay loop width="500" height="500">
-        <source src={video} type="video/mp4" />
-      </video>
       <p
         style={{
           fontSize: 50,
