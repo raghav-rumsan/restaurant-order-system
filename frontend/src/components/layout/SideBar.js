@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import { Layout, Menu, Card } from "antd";
+import { Layout, Menu, Card, PageHeader } from "antd";
 import { Link } from "@reach/router";
 import { menuItems } from "./menuItems";
+import UserDetail from "../../container/components/UserDetail";
 
 const { Sider, Header, Content } = Layout;
 const { SubMenu } = Menu;
@@ -82,18 +83,22 @@ const SideBar = ({ children, user }) => {
                       >
                         {subMenu.children.map((subSubMenu, subSubMenuIndex) => {
                           if (subSubMenu.children == null) {
-                            return (
-                              <Menu.Item
-                                key={`${subSubMenu.title}-${subSubMenuIndex}-subsubmenu-no-child`}
-                              >
-                                <>
-                                  <Link to={`${subSubMenu.link}`}>
-                                    {subSubMenu?.icon}
-                                    {subSubMenu.title}
-                                  </Link>
-                                </>
-                              </Menu.Item>
-                            );
+                            if (
+                              subMenu?.authority &&
+                              handleAuth(subSubMenu.authority)
+                            )
+                              return (
+                                <Menu.Item
+                                  key={`${subSubMenu.title}-${subSubMenuIndex}-subsubmenu-no-child`}
+                                >
+                                  <>
+                                    <Link to={`${subSubMenu.link}`}>
+                                      {subSubMenu?.icon}
+                                      {subSubMenu.title}
+                                    </Link>
+                                  </>
+                                </Menu.Item>
+                              );
                           } else {
                             if (
                               subSubMenu?.authority &&
@@ -101,6 +106,7 @@ const SideBar = ({ children, user }) => {
                             )
                               return (
                                 <SubMenu
+                                  title={subSubMenu.title}
                                   key={`subSubmenu-with-child-${subSubMenu.title}-${subSubMenuIndex}-with-child`}
                                 >
                                   {subSubMenu?.authority &&
@@ -131,13 +137,21 @@ const SideBar = ({ children, user }) => {
         collapsed={collapsed}
         onCollapse={onCollapse}
       >
-        <Menu defaultSelectedKeys={["1"]} mode="inline">
+        <Menu
+          onClick={(props) => console.log("props", props)}
+          defaultSelectedKeys={["1"]}
+          mode="inline"
+        >
           {menuRender()}
         </Menu>
       </Sider>
 
       <Layout>
-        <Header>{/* <NavBar user={this.props.user} /> */}</Header>
+        <Header>
+          <div style={{ float: "right" }}>
+            <UserDetail />
+          </div>
+        </Header>
 
         <Content style={{ margin: "1rem" }}>
           <Card>{children}</Card>

@@ -10,7 +10,7 @@ import {
 import Loader from "../../components/loader/Loader";
 
 // Route only logged-in-user can access
-const ProtectedRoute = ({
+const SuperAdminRoute = ({
   client,
   token,
   user,
@@ -29,6 +29,9 @@ const ProtectedRoute = ({
   }, [accessToken]);
 
   if (user.id) {
+    if (user.role !== "super-admin") {
+      return <h1>You do not have permission to view this.</h1>;
+    }
     return <Container {...restProps} />;
   }
   return <Loader />;
@@ -41,4 +44,4 @@ const mapStateToProps = createStructuredSelector({
   accessToken: selectAccessToken,
 });
 
-export default connect(mapStateToProps)(ProtectedRoute);
+export default connect(mapStateToProps)(SuperAdminRoute);

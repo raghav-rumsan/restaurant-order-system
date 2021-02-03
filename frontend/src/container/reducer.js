@@ -3,11 +3,15 @@ import * as types from "./types";
 
 export const INITIAL_STATE = {
   theme: "dark",
-  token: "s",
+  tokens: {
+    access: { token: "" },
+    refresh: {},
+  },
   user: {
-    user_name: "",
-    role: "admin",
-    id: 22,
+    name: "",
+    email: "",
+    role: "",
+    id: "",
   },
   client: {
     client_name: "",
@@ -22,7 +26,8 @@ const reducer = (state = INITIAL_STATE, { type, payload }) =>
         draft.theme = payload;
         break;
       case types.SET_TOKEN:
-        draft.token = payload;
+        draft.tokens = payload.tokens;
+        draft.user = payload.user;
         break;
       case types.GET_USER_SUCCESS:
         draft.user = payload;

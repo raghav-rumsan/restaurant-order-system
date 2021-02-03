@@ -16,13 +16,14 @@ if (token) {
   // todo: check for valid token
   const today = new Date();
   try {
-    const tokenWithoutBearer = token.replace("Bearer ", "");
+    const parsedToken = JSON.parse(token);
+    const tokenWithoutBearer = parsedToken.tokens.access.token;
     var decoded = jwtDecode(tokenWithoutBearer);
     const { exp } = decoded;
     const expiryDate = new Date(exp * 1000);
     // assuming user time is in sync with server time
     if (isBefore(today, expiryDate)) {
-      store.dispatch(setToken(token));
+      store.dispatch(setToken(parsedToken));
     } else {
       localStorage.removeItem("token");
     }

@@ -2,32 +2,43 @@ import React, { useEffect, useState } from "react";
 import { api } from "../api";
 import { Router } from "@reach/router";
 import { createStructuredSelector } from "reselect";
-// import { getUser } from "./actions";
+import { getUser } from "./actions";
 import { connect } from "react-redux";
-import { PublicRoute, PageNotFound } from "./components";
-// import { Login } from "./guest";
+import {
+  PublicRoute,
+  PageNotFound,
+  GuestRoute,
+  ProtectedRoute,
+  SuperAdminRoute,
+} from "./components";
+import { Login } from "./guest";
 import LayoutContainer from "../components/layout/LayoutContainer";
-import { selectToken } from "./selectors";
-
+import { selectAccessToken, selectToken } from "./selectors";
 import { Dashboard } from "./protected";
-const AppContainer = ({ token, getUser }) => {
+import { Clients } from "./superadmin";
+const AppContainer = ({ token, getUser, accessToken }) => {
   // useEffect(() => {
   //   getClient();
   // }, []);
   // const [theme] = useState(null);
-
-  // useEffect(() => {
-  //   api.defaults.headers.common.Authorization = token;
-  //   if (token) {
-  //     getUser();
-  //   }
-  // }, [token, getUser]);
+  useEffect(() => {
+    api.defaults.headers.common.Authorization = `Bearer ${accessToken}`;
+    if (accessToken) {
+      // getUser();
+    }
+  }, [accessToken, getUser]);
 
   return (
     <>
       <LayoutContainer>
         <Router>
-          <PublicRoute container={Dashboard} path="/" />
+          {/* Protected */}
+
+          <ProtectedRoute container={Dashboard} path="/" />
+          <GuestRoute container={Login} path="/login" />
+          {/* SuperAdmin */}
+          <SuperAdminRoute container={Clients} path="clients/*" />
+
           <PublicRoute container={PageNotFound} path="*" />
         </Router>
       </LayoutContainer>
@@ -37,10 +48,11 @@ const AppContainer = ({ token, getUser }) => {
 
 const mapStateToProps = createStructuredSelector({
   token: selectToken,
+  accessToken: selectAccessToken,
 });
 
-// const mapDispatchToProps = {
-//   getUser,
-// };
+const mapDispatchToProps = {
+  getUser,
+};
 
-export default connect(mapStateToProps, null)(AppContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(AppContainer);
