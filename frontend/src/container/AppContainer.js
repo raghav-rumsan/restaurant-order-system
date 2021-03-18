@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { api } from "../api";
 import { Router } from "@reach/router";
 import { createStructuredSelector } from "reselect";

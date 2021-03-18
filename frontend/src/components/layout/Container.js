@@ -8,6 +8,7 @@ import {
   selectIsLoggedIn,
 } from "../../container/selectors";
 import SideBar from "./SideBar";
+import ThemeHandler from "./ThemeHandler";
 
 const { Content } = Layout;
 
@@ -20,6 +21,9 @@ class Container extends React.Component {
         {isLoggedIn ? (
           <SideBar user={user}>{children}</SideBar>
         ) : (
+          // {isLoggedIn ? (
+          //   <SideBar user={user}>{children}</SideBar>
+          // ) : (
           <Content style={{ margin: "1rem" }}>{children}</Content>
         )}
       </Layout>

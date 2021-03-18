@@ -5,9 +5,9 @@ import isBefore from "date-fns/isBefore";
 import configureStore from "./redux/configureStore";
 import AppContainer from "./container";
 import { setToken } from "./container/actions";
-import "./App.less";
 import { ConfigProvider } from "antd";
 import frFR from "antd/lib/locale/fr_FR";
+import "./styles/main.less";
 
 const { store } = configureStore();
 
