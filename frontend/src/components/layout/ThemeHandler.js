@@ -4,11 +4,22 @@ import { Sun, Moon } from "@styled-icons/boxicons-solid";
 import darkVars from "../../dark.json";
 import lightVars from "../../light.json";
 // import "../../styles/main.less";
+import appThemeLight from "../../appThemeLight";
+import appThemeDark from "../../appThemeDark";
+
+const modifiedLightVars = {
+  ...lightVars,
+  ...appThemeLight,
+};
+const modifiedDarkVars = {
+  ...darkVars,
+  ...appThemeDark,
+};
 
 class ThemeHandler extends Component {
   constructor(props) {
     super(props);
-    let initialValue = lightVars;
+    let initialValue = modifiedLightVars;
     let vars = {};
     let themeName = localStorage.getItem("theme-name") || "light";
 
@@ -65,10 +76,10 @@ class ThemeHandler extends Component {
       <>
         <Switch
           checked={this.state.themeName === "dark"}
-          checkedChildren={<Sun size={18} />}
-          unCheckedChildren={<Moon size={18} />}
+          checkedChildren={<Moon size={18} />}
+          unCheckedChildren={<Sun size={18} />}
           onChange={(v) => {
-            let vars = !v ? lightVars : darkVars;
+            let vars = !v ? modifiedLightVars : modifiedDarkVars;
             let value = !v ? "light" : "dark";
             vars = {
               ...vars,

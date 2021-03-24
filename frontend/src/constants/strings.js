@@ -1,1 +1,1 @@
-export const appName = "Restaurant Menu";
+export const appName = "मेरो Order";

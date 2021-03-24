@@ -16,6 +16,7 @@ import LayoutContainer from "../components/layout/LayoutContainer";
 import { selectAccessToken, selectToken } from "./selectors";
 import { Dashboard } from "./protected";
 import { Clients } from "./superadmin";
+import { Home, OrderConfirm } from "./public";
 const AppContainer = ({ token, getUser, accessToken }) => {
   // useEffect(() => {
   //   getClient();
@@ -35,6 +36,8 @@ const AppContainer = ({ token, getUser, accessToken }) => {
           {/* Protected */}
 
           <ProtectedRoute container={Dashboard} path="/" />
+          <PublicRoute container={Home} path="/home" />
+          <PublicRoute container={OrderConfirm} path="/confirm-order/:id" />
           <GuestRoute container={Login} path="/login" />
           {/* SuperAdmin */}
           <SuperAdminRoute container={Clients} path="clients/*" />

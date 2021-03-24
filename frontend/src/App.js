@@ -6,7 +6,6 @@ import configureStore from "./redux/configureStore";
 import AppContainer from "./container";
 import { setToken } from "./container/actions";
 import { ConfigProvider } from "antd";
-import frFR from "antd/lib/locale/fr_FR";
 import "./styles/main.less";
 
 const { store } = configureStore();
@@ -34,7 +33,7 @@ if (token) {
 const App = () => {
   return (
     <Provider store={store}>
-      <ConfigProvider locale={frFR}>
+      <ConfigProvider>
         <AppContainer />
       </ConfigProvider>
     </Provider>
