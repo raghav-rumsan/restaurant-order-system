@@ -22,7 +22,7 @@ const reducer = (state = INITIAL_STATE, action) =>
         draft.loading = true;
         break;
       case types.CREATE_CLIENT_SUCCESS:
-        draft.data = INITIAL_STATE.data;
+        // draft.data = INITIAL_STATE.data;
         draft.loading = false;
         break;
       case types.CREATE_CLIENT_FAILURE:

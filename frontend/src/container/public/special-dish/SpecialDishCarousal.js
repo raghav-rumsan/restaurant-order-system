@@ -39,7 +39,10 @@ const SpecialDishCarousal = () => {
     <div>
       <Carousel style={{ background: "#CC313d" }} autoplay>
         {items.map(({ title, dishes }) => (
-          <div style={{ textAlign: "center", padding: 30, margin: 30 }}>
+          <div
+            key={`special-dish-${title}`}
+            style={{ textAlign: "center", padding: 30, margin: 30 }}
+          >
             <h1
               style={{
                 color: "white",
@@ -117,6 +120,8 @@ const SpecialDishCarousal = () => {
                   right: "20%",
                 }}
                 lg={8}
+                sm={24}
+                xs={24}
               >
                 {carousalActions(dishes[0].id, dishes[0].dishName)}
               </Col>

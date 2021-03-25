@@ -1,6 +1,7 @@
 import * as types from "./types";
 import { userDetailGet } from "../api";
 import { selectUser } from "./selectors";
+import { INITIAL_STATE } from "./reducer";
 
 export const setToken = (payload) => ({
   type: types.SET_TOKEN,
@@ -37,8 +38,10 @@ export const getUser = () => async (dispatch, getState) => {
 };
 
 export const logoutUser = () => async (dispatch) => {
-  localStorage.clear();
-  dispatch(setToken(""));
+  localStorage.removeItem("token");
+  dispatch(
+    setToken({ tokens: INITIAL_STATE.tokens, user: INITIAL_STATE.user })
+  );
 };
 
 // export const getClientRequest = payload => ({

@@ -7,7 +7,7 @@ import {
   selectUser,
   selectIsLoggedIn,
 } from "../../container/selectors";
-// import SideBar from "./SideBar";
+import SideBar from "./SideBar";
 import LayoutWithHeader from "./LayoutWithHeader";
 // import ThemeHandler from "./ThemeHandler";
 
@@ -19,12 +19,12 @@ class Container extends React.Component {
 
     return (
       <Layout style={{ minHeight: "100vh" }}>
-        <LayoutWithHeader>{children}</LayoutWithHeader>
-        {/* {!isLoggedIn ? (
+        {isLoggedIn ? (
           <SideBar user={user}>{children}</SideBar>
         ) : (
-          <Content style={{ margin: "1rem" }}>{children}</Content>
-        )} */}
+          <LayoutWithHeader>{children}</LayoutWithHeader>
+          // <Content style={{ margin: "1rem" }}>{children}</Content>
+        )}
       </Layout>
     );
   }

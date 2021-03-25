@@ -17,7 +17,7 @@
 export const menuItems = [
   {
     title: "Home",
-    link: "/",
+    link: "/home",
     authority: ["user", "super-admin", "admin"],
   },
   {

@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
-import { selectToken } from "../selectors";
+import { selectAccessToken, selectToken } from "../selectors";
 
 // Route logged-in-user cannot access
 const GuestRoute = ({ token, container: Container, ...restProps }) => {
@@ -18,7 +18,7 @@ const GuestRoute = ({ token, container: Container, ...restProps }) => {
 };
 
 const mapStateToProps = createStructuredSelector({
-  token: selectToken
+  token: selectAccessToken,
 });
 
 export default connect(mapStateToProps)(GuestRoute);

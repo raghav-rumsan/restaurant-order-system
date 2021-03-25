@@ -42,7 +42,7 @@ const items = [
     ],
   },
   {
-    title: "Today's Special",
+    title: "Non Veg Dishes",
     dishes: [
       {
         dishName: "Momo",
@@ -77,12 +77,12 @@ const items = [
       {
         id: 55,
 
-        dishName: "Veg Chowmein",
+        dishName: "Pork Chowmein",
         image:
           "https://upload.wikimedia.org/wikipedia/commons/d/d1/Chow_mein_1_by_yuen.jpg",
         price: 100,
-        type: "veg",
-        preference: "veg",
+        type: "pork",
+        preference: "non-veg",
       },
     ],
   },

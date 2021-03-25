@@ -1,7 +1,7 @@
 import { Form, Input } from "antd";
 import React from "react";
 import { connect } from "react-redux";
-import * as mapDispatchToProps from "../actions";
+import { setDataValue } from "../actions";
 
 const TextInput = ({
   name = "",
@@ -41,5 +41,7 @@ const TextInput = ({
     </div>
   );
 };
+
+const mapDispatchToProps = { setDataValue };
 
 export default connect(null, mapDispatchToProps)(TextInput);

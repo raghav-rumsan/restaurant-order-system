@@ -1,5 +1,6 @@
 import { Layout, BackTop, Card } from "antd";
 import SpecialDishCarousal from "../../container/public/special-dish/SpecialDishCarousal";
+import Footer from "./Footer";
 import HeaderLayout from "./HeaderLayout";
 
 const { Content } = Layout;
@@ -15,6 +16,7 @@ const LayoutWithHeader = ({ children }) => {
         <Card bordered={false}>{children}</Card>
       </Content>
       <BackTop />
+      <Footer />
     </Layout>
   );
 };

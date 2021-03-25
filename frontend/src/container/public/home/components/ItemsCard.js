@@ -51,10 +51,15 @@ const ItemsCard = ({ dishes = [], title = "" }) => {
     <Card bordered={false} title={<h2>{title}</h2>} extra={cardExtra}>
       <Row gutter={[16, 16]}>
         {dishes.map(({ dishName, image, type, preference, price, id }) => (
-          <Col lg={6} sm={24} xs={24} md={8}>
+          <Col
+            key={`${dishName}-${type}-${preference}-${id}`}
+            lg={6}
+            sm={24}
+            xs={24}
+            md={8}
+          >
             <Card
               style={{ maxHeight: 250, minHeight: 250 }}
-              key={`${dishName}-${type}-${preference}`}
               actions={cardActions(id, dishName)}
               cover={
                 <Image

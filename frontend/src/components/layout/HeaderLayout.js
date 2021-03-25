@@ -6,8 +6,8 @@ import { Link } from "@reach/router";
 import { selectIsLoggedIn } from "../../container/selectors";
 import { createStructuredSelector } from "reselect";
 import { connect } from "react-redux";
-import { ShoppingCartOutlined } from "@ant-design/icons";
 import Cart from "../../container/components/Cart";
+import User from "./User";
 
 const { Header } = Layout;
 
@@ -16,31 +16,31 @@ const HeaderLayout = ({ isLoggedIn }) => {
     <Affix>
       <Header>
         <Row>
-          <Col span={6} style={{ float: "left" }}>
+          <Col lg={8} sm={12} xs={12} md={12} style={{ float: "left" }}>
             <Link to={isLoggedIn ? "/" : "/home"}>
               <h4
-                style={{ fontFamily: "Raleway", fontWeight: 900, fontSize: 24 }}
+                style={{
+                  fontWeight: 900,
+                  fontSize: "1.5rem",
+                }}
               >
                 {appName}
               </h4>
             </Link>
           </Col>
-          <Col
-            style={{ float: "right", alignContent: "end", alignItems: "end" }}
-            span={18}
-          >
-            <Col style={{ float: "right" }}>
-              <Col style={{ float: "left" }} span={12}>
+          <Col style={{ float: "right" }} lg={16} sm={12} xs={12} md={12}>
+            <Row gutter={24} style={{}}>
+              <Col style={{}} span={8}>
                 <ThemeHandler />{" "}
               </Col>
 
-              {/* <Col style={{ float: "right" }} span={12}>
-                <Locale />
-              </Col> */}
-              <Col style={{ float: "right" }} span={12}>
+              <Col style={{}} span={8}>
                 <Cart />
               </Col>
-            </Col>
+              <Col style={{ float: "right" }} span={8}>
+                <User />
+              </Col>
+            </Row>
           </Col>
         </Row>
       </Header>
