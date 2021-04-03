@@ -29,6 +29,10 @@ const userSchema = mongoose.Schema(
       trim: true,
       minlength: 10,
     },
+    numberOfTables: {
+      type: Number,
+      required: true,
+    },
     password: {
       type: String,
       required: true,

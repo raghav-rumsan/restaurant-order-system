@@ -35,8 +35,8 @@ const reducer = (state = INITIAL_STATE, { type, payload }) =>
       case types.GET_CLIENT_SUCCESS:
         draft.client = payload.data;
         break;
-      default:
-        return INITIAL_STATE;
+      // default:
+      //   return INITIAL_STATE;
     }
     // case for token expiry
     if (type.slice(type.length - 7) === "FAILURE") {

@@ -43,7 +43,7 @@ export const menuItems = [
       },
       {
         title: "Orders",
-        authority: ["super-admin"],
+        authority: ["admin"],
         link: "/orders",
       },
       {

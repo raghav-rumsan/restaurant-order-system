@@ -9,8 +9,8 @@ const items = [
         image:
           "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a1/Momo_nepal.jpg/1280px-Momo_nepal.jpg",
         price: 100,
-        type: "chicken",
-        preference: "non-veg",
+        dishType: "chicken",
+        dishPreference: "non-veg",
       },
       {
         dishName: "Chowmein",
@@ -18,8 +18,8 @@ const items = [
         image:
           "https://upload.wikimedia.org/wikipedia/commons/d/d1/Chow_mein_1_by_yuen.jpg",
         price: 120,
-        type: "buff",
-        preference: "non-veg",
+        dishType: "buff",
+        dishPreference: "non-veg",
       },
       {
         dishName: "Veg Chowmein",
@@ -27,8 +27,8 @@ const items = [
         image:
           "https://upload.wikimedia.org/wikipedia/commons/d/d1/Chow_mein_1_by_yuen.jpg",
         price: 100,
-        type: "veg",
-        preference: "veg",
+        dishType: "veg",
+        dishPreference: "veg",
       },
       {
         id: 85,
@@ -36,8 +36,8 @@ const items = [
         image:
           "https://upload.wikimedia.org/wikipedia/commons/d/d1/Chow_mein_1_by_yuen.jpg",
         price: 100,
-        type: "veg",
-        preference: "veg",
+        dishType: "veg",
+        dishPreference: "veg",
       },
     ],
   },
@@ -51,8 +51,8 @@ const items = [
         image:
           "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a1/Momo_nepal.jpg/1280px-Momo_nepal.jpg",
         price: 100,
-        type: "chicken",
-        preference: "non-veg",
+        dishType: "chicken",
+        dishPreference: "non-veg",
       },
       {
         id: 35,
@@ -61,8 +61,8 @@ const items = [
         image:
           "https://upload.wikimedia.org/wikipedia/commons/d/d1/Chow_mein_1_by_yuen.jpg",
         price: 120,
-        type: "buff",
-        preference: "non-veg",
+        dishType: "buff",
+        dishPreference: "non-veg",
       },
       {
         id: 28,
@@ -71,8 +71,8 @@ const items = [
         image:
           "https://upload.wikimedia.org/wikipedia/commons/d/d1/Chow_mein_1_by_yuen.jpg",
         price: 120,
-        type: "buff",
-        preference: "non-veg",
+        dishType: "buff",
+        dishPreference: "non-veg",
       },
       {
         id: 55,
@@ -81,8 +81,8 @@ const items = [
         image:
           "https://upload.wikimedia.org/wikipedia/commons/d/d1/Chow_mein_1_by_yuen.jpg",
         price: 100,
-        type: "pork",
-        preference: "non-veg",
+        dishType: "pork",
+        dishPreference: "non-veg",
       },
     ],
   },

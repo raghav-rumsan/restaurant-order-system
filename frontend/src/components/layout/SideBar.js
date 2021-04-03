@@ -143,7 +143,7 @@ const SideBar = ({ children, user }) => {
         <HeaderLayout />
 
         <Content style={{ margin: "1rem" }}>
-          <Card>{children}</Card>
+          <Card bordered={false}>{children}</Card>
         </Content>
         <Layout.Footer style={{ textAlign: "center" }}>© 2021</Layout.Footer>
       </Layout>

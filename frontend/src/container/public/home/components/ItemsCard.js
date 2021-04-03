@@ -27,7 +27,7 @@ const ItemsCard = ({ dishes = [], title = "" }) => {
       </Row>
     );
   };
-  const itemCardDesc = (type, preference) => {
+  const itemCardDesc = (type, dishPreference) => {
     return (
       <Row>
         <Col span={12}>
@@ -37,10 +37,10 @@ const ItemsCard = ({ dishes = [], title = "" }) => {
           <Tag
             style={{
               float: "right",
-              color: preference === "veg" ? "green" : "red",
+              color: dishPreference === "veg" ? "green" : "red",
             }}
           >
-            {preference}
+            {dishPreference}
           </Tag>
         </Col>
       </Row>
@@ -50,37 +50,39 @@ const ItemsCard = ({ dishes = [], title = "" }) => {
   return (
     <Card bordered={false} title={<h2>{title}</h2>} extra={cardExtra}>
       <Row gutter={[16, 16]}>
-        {dishes.map(({ dishName, image, type, preference, price, id }) => (
-          <Col
-            key={`${dishName}-${type}-${preference}-${id}`}
-            lg={6}
-            sm={24}
-            xs={24}
-            md={8}
-          >
-            <Card
-              style={{ maxHeight: 250, minHeight: 250 }}
-              actions={cardActions(id, dishName)}
-              cover={
-                <Image
-                  placeholder={
-                    <Image preview={false} src={image} width={200} />
-                  }
-                  src={image}
-                  alt={dishName}
-                  // loading="lazy"
-                />
-              }
-              bordered={false}
-              hoverable
+        {dishes.map(
+          ({ dishName, image, dishType, dishPreference, price, id }) => (
+            <Col
+              key={`${dishName}-${dishType}-${dishPreference}-${id}`}
+              lg={6}
+              sm={24}
+              xs={24}
+              md={8}
             >
-              <Card.Meta
-                title={itemCardTitle(dishName, price)}
-                description={itemCardDesc(type, preference)}
-              />
-            </Card>
-          </Col>
-        ))}
+              <Card
+                style={{ maxHeight: 250, minHeight: 250 }}
+                actions={cardActions(id, dishName)}
+                cover={
+                  <Image
+                    placeholder={
+                      <Image preview={false} src={image} width={200} />
+                    }
+                    src={image}
+                    alt={dishName}
+                    // loading="lazy"
+                  />
+                }
+                bordered={false}
+                hoverable
+              >
+                <Card.Meta
+                  title={itemCardTitle(dishName, price)}
+                  description={itemCardDesc(dishType, dishPreference)}
+                />
+              </Card>
+            </Col>
+          )
+        )}
       </Row>
     </Card>
   );

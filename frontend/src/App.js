@@ -5,7 +5,6 @@ import isBefore from "date-fns/isBefore";
 import configureStore from "./redux/configureStore";
 import AppContainer from "./container";
 import { setToken } from "./container/actions";
-import { ConfigProvider } from "antd";
 import "./styles/main.less";
 
 const { store } = configureStore();
@@ -33,9 +32,7 @@ if (token) {
 const App = () => {
   return (
     <Provider store={store}>
-      <ConfigProvider>
-        <AppContainer />
-      </ConfigProvider>
+      <AppContainer />
     </Provider>
   );
 };

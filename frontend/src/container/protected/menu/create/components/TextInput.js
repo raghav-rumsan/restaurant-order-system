@@ -1,45 +1,41 @@
 import { Form, Input } from "antd";
 import React from "react";
+import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { setDataValue } from "../actions";
 
-const TextInput = ({
-  name = "",
-  label = "",
-  placeholder = "",
-  required,
-  type,
-  setDataValue,
-}) => {
+const TextInput = ({ required, setDataValue, ...props }) => {
   const handleInputChange = (e) => {
     const { value } = e.target;
     // console.log("value", value);
     setDataValue({
-      key: name,
+      key: props.name,
       value: value,
     });
   };
 
   return (
     <div>
-      <h3>{label}</h3>
+      {/* <h3>{label}</h3> */}
       <Form.Item
+        {...props}
         rules={[
           {
             required,
-            message: `Please Input ${placeholder}`,
+            message: `Please Input ${props.placeholder}`,
           },
         ]}
-        name={name}
       >
-        <Input
-          type={type}
-          onChange={handleInputChange}
-          placeholder={placeholder}
-        />
+        <Input {...props} onChange={handleInputChange} />
       </Form.Item>
     </div>
   );
+};
+
+TextInput.propTypes = {
+  name: PropTypes.string.isRequired,
+  label: PropTypes.string.isRequired,
+  placeholder: PropTypes.string.isRequired,
 };
 
 const mapDispatchToProps = { setDataValue };

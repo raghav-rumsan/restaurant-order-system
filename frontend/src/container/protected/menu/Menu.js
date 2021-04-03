@@ -1,16 +1,14 @@
 import { Router } from "@reach/router";
 import Create from "./create/Create";
 import List from "./list/List";
-import View from "./view/View";
 
-const Clients = () => {
+const Menu = () => {
   return (
     <Router>
-      <Create path="create" />
+      <Create path="add" />
       <List path="list" />
-      <View path="view/:id" />
     </Router>
   );
 };
 
-export default Clients;
+export default Menu;

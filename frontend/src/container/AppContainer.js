@@ -14,7 +14,7 @@ import {
 import { Login } from "./guest";
 import LayoutContainer from "../components/layout/LayoutContainer";
 import { selectAccessToken, selectToken } from "./selectors";
-import { Dashboard } from "./protected";
+import { Dashboard, Menu } from "./protected";
 import { Clients } from "./superadmin";
 import { Home, OrderConfirm } from "./public";
 const AppContainer = ({ token, getUser, accessToken }) => {
@@ -24,9 +24,9 @@ const AppContainer = ({ token, getUser, accessToken }) => {
   // const [theme] = useState(null);
   useEffect(() => {
     api.defaults.headers.common.Authorization = `Bearer ${accessToken}`;
-    if (accessToken) {
-      // getUser();
-    }
+    // if (accessToken) {
+    //   // getUser();
+    // }
   }, [accessToken, getUser]);
 
   return (
@@ -36,6 +36,7 @@ const AppContainer = ({ token, getUser, accessToken }) => {
           {/* Protected */}
 
           <ProtectedRoute container={Dashboard} path="/" />
+          <ProtectedRoute container={Menu} path="/menu/*" />
           <PublicRoute container={Home} path="/home" />
           <PublicRoute container={OrderConfirm} path="/confirm-order/:id" />
           <GuestRoute container={Login} path="/login" />

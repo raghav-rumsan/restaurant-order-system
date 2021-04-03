@@ -39,7 +39,7 @@ const Login = ({ login, loading, ...props }) => {
   const onFinish = async () => {
     try {
       await login(data);
-      openNotification("success", "Successfully Logged In, Redirecting...");
+      openNotification("success", "Successfully Logged In");
       // navigate("/");
     } catch (error) {
       console.log("error", error.response);

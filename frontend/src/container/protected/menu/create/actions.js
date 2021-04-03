@@ -8,17 +8,17 @@ export const setDataValue = (payload) => ({
 });
 
 export const clientCreateRequest = (payload) => ({
-  type: types.CREATE_CLIENT_REQUEST,
+  type: types.CREATE_MENU_ITEM_REQUEST,
   payload,
 });
 
 export const clientCreateSuccess = (payload) => ({
-  type: types.CREATE_CLIENT_SUCCESS,
+  type: types.CREATE_MENU_ITEM_SUCCESS,
   payload,
 });
 
 export const clientCreateFailure = (payload) => ({
-  type: types.CREATE_CLIENT_FAILURE,
+  type: types.CREATE_MENU_ITEM_FAILURE,
   payload,
 });
 

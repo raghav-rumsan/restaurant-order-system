@@ -4,35 +4,25 @@ import * as types from "./types";
 export const INITIAL_STATE = {
   loading: false,
   data: {
-    email: "",
-    phone: "",
-    name: "",
-    password: "",
+    limit: "",
+    results: [],
   },
-  error: {
-    message: "",
-  },
+  error: {},
 };
 
 const reducer = (state = INITIAL_STATE, action) =>
   produce(state, (draft) => {
     switch (action.type) {
-      case types.SET_DATA:
-        draft.data[action.payload.key] = action.payload.value;
-        break;
-      case types.CREATE_CLIENT_REQUEST:
+      case types.GET_CLIENTS_LIST_REQUEST:
         draft.loading = true;
         break;
-      case types.CREATE_CLIENT_SUCCESS:
-        // draft.data = INITIAL_STATE.data;
+      case types.GET_CLIENTS_LIST_SUCCESS:
+        draft.data = action.payload;
         draft.loading = false;
         break;
-      case types.CREATE_CLIENT_FAILURE:
+      case types.GET_CLIENTS_LIST_FAILURE:
         draft.loading = false;
         draft.error = action.payload;
-        break;
-      // default:
-      //   return INITIAL_STATE;
     }
   });
 

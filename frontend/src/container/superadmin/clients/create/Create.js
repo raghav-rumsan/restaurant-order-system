@@ -1,72 +1,33 @@
 import { Title } from "../../../components";
 import { useInjectReducer } from "../../../../utils/injectReducer";
 import reducer from "./reducers";
-import { reduxKey, selectLoading } from "./selectors";
-import { Button, Form, Input } from "antd";
+import { reduxKey, selectError, selectLoading } from "./selectors";
+import { Alert, Button, Form } from "antd";
 import { createStructuredSelector } from "reselect";
 import { connect } from "react-redux";
-import { useState } from "react";
 import { clientCreate } from "./actions";
-// import TextInput from "./components/TextInput";
+import TextInput from "./components/TextInput";
 
-const Create = ({ loading }) => {
+const Create = ({ loading, clientCreate, errors }) => {
   const [form] = Form.useForm();
-  const TextInput = ({
-    name = "",
-    label = "",
-    placeholder = "",
-    required,
-    type,
-    // setDataValue,
-  }) => {
-    useInjectReducer({ reducer, key: reduxKey });
 
-    const [state, setState] = useState({
-      name: "",
-      email: "",
-      phone: "",
-      password: "",
-    });
-
-    const handleInputChange = (e) => {
-      const { value } = e.target;
-      // console.log("value", value);
-      setState({
-        ...state,
-        [name]: value,
-      });
-    };
-    console.log(`state`, state);
-
-    return (
-      <div>
-        <h3>{label}</h3>
-        <Form.Item
-          rules={[
-            {
-              required,
-              message: `Please Input ${placeholder}`,
-            },
-          ]}
-          name={name}
-        >
-          <Input
-            type={type}
-            onChange={handleInputChange}
-            placeholder={placeholder}
-          />
-        </Form.Item>
-      </div>
-    );
-  };
+  useInjectReducer({ reducer, key: reduxKey });
 
   const handleForm = async () => {
-    // const createdClient = await clientCreate(state)
+    try {
+      await clientCreate();
+      form.resetFields();
+    } catch (error) {
+      console.log(`{error}`, { error });
+    }
   };
+
+  console.log(`errors`, errors);
 
   return (
     <div>
       <Title>Create Client</Title>
+      {errors?.message && <Alert type="error" message={errors.message} />}
       <div>
         <Form onFinish={handleForm} form={form}>
           <TextInput
@@ -89,14 +50,26 @@ const Create = ({ loading }) => {
             required
           />
           <TextInput
+            name="numberOfTables"
+            type="number"
+            label="Number of tables"
+            placeholder="Number of tables in the Restaurant"
+            required
+          />
+          <TextInput
             name="password"
             label="Admin Password"
             placeholder="Password for the admin"
             required
           />
           <Form.Item>
-            <Button htmlType="submit" type="primary">
-              Add
+            <Button
+              disabled={loading}
+              loading={loading}
+              htmlType="submit"
+              type="primary"
+            >
+              Add Client
             </Button>
           </Form.Item>
         </Form>
@@ -107,6 +80,11 @@ const Create = ({ loading }) => {
 
 const mapStateToProps = createStructuredSelector({
   loading: selectLoading,
+  errors: selectError,
 });
 
-export default connect(mapStateToProps)(Create);
+const mapDispatchToProps = {
+  clientCreate,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Create);
