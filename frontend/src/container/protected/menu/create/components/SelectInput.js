@@ -20,7 +20,6 @@ const SelectInput = ({ optionsKey, setDataValue, ...props }) => {
     });
   };
 
-  console.log(`object`, props[optionsKey]);
   return (
     <Form.Item {...props}>
       <Select onChange={handleSelect} {...props} opt>

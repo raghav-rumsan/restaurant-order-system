@@ -13,6 +13,7 @@ const Create = ({ data }) => {
   useInjectReducer({ key: reduxKey, reducer });
 
   const [form] = Form.useForm();
+
   return (
     <div>
       <Title>Add to Menu</Title>
