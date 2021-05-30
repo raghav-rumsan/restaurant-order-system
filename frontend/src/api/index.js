@@ -1,10 +1,9 @@
 import axios from "axios";
 import Qs from "query-string";
 
-export const BASE_URL =
-  process.env.NODE_ENV === "production"
-    ? "" //server-live
-    : "http://localhost:8080"; //server-local
+export const BASE_URL = process.env.REACT_APP_BASE_URL;
+
+console.log(`process.env`, process.env);
 
 export const api = axios.create({
   baseURL: BASE_URL,

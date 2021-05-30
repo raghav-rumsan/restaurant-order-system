@@ -4,6 +4,7 @@ import PageNotFound from "./PageNotFound";
 import ProtectedRoute from "./ProtectedRoute";
 import SuperAdminRoute from "./SuperAdminRoute";
 import Title from "./Title";
+import MediaLibrary from "./MediaLibrary";
 
 export {
   PublicRoute,
@@ -12,4 +13,5 @@ export {
   PageNotFound,
   SuperAdminRoute,
   Title,
+  MediaLibrary,
 };

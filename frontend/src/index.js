@@ -3,9 +3,6 @@ import { render } from "react-dom";
 import App from "./App";
 import * as serviceWorkerRegistration from "./serviceWorkerRegistration";
 import reportWebVitals from "./reportWebVitals";
-import { appName } from "./constants/strings";
-
-document.title = appName;
 
 // import "babel-polyfill";
 

@@ -8,6 +8,7 @@ import UploadImage from "./components/UploadImage";
 import { reduxKey, selectData } from "./selectors";
 import reducer from "./reducers";
 import { createStructuredSelector } from "reselect";
+import Media from "./components/Media";
 
 const Create = ({ data }) => {
   useInjectReducer({ key: reduxKey, reducer });
@@ -80,7 +81,8 @@ const Create = ({ data }) => {
             </Col>
           )}
           <Col span={24}>
-            <UploadImage />
+            {/* <UploadImage /> */}
+            <Media />
           </Col>
         </Row>
 
