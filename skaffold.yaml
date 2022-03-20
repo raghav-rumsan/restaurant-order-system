@@ -1,0 +1,28 @@
+apiVersion: skaffold/v2alpha3
+kind: Config
+deploy:
+  kubectl:
+    manifests:
+      - "./infra/k8s/*"
+      - "./infra/k8s-dev/*"
+build:
+  local:
+    push: false
+  artifacts:
+    - image: argahv/roms-auth
+      context: auth
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - dest: .
+            src: "src/**/*.ts"
+
+    - image: argahv/roms-client
+      context: client
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - dest: .
+            src: "src/**/*.ts"
