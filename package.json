@@ -21,7 +21,8 @@
   },
   "scripts": {
     "publish": "yarn lerna publish",
-    "commit": "yarn git-cz"
+    "commit": "yarn git-cz",
+    "prepare": "husky install"
   },
   "config": {
     "commitizen": {
