@@ -1,6 +1,6 @@
 {
   "name": "@romss/backend-common",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "common package repo for the backend of restaurant order managment system",
   "main": "./build/index.js",
   "types": "./build/index.d.ts",
