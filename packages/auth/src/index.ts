@@ -1,8 +1,26 @@
-import express from "express";
+import { RequestValidationError } from "@romass/backend-common";
+import mongoose from "mongoose";
+import { app } from "./app";
 
-const app = express();
+const start = async () => {
+  console.log("Starting up...");
+  if (!process.env.JWT_KEY) {
+    throw new Error("JWT_KEY must be defined");
+  }
+  if (!process.env.MONGO_URI) {
+    throw new Error("MONGO_URI must be defined");
+  }
+  try {
+    await mongoose.connect(process.env.MONGO_URI);
+    console.log("Connected to MongoDB");
+  } catch (error) {
+    console.error(error);
+  }
 
-const port = 4001;
-app.listen(port, () => {
-  console.log(`Listening on port ${port}`);
-});
+  const port = 3000;
+  app.listen(port, () => {
+    console.log(`Listening on port ${port}`);
+  });
+};
+
+start();

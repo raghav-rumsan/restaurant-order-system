@@ -6,7 +6,9 @@
   "scripts": {
     "start": "ts-node-dev src/index.ts",
     "test": "jest --watchAll --no-cache",
-    "test:ci": "jest"
+    "test:ci": "jest",
+    "docker:build": "docker build -t argahv/roms-auth .",
+    "docker:push": "docker push argahv/roms-auth"
   },
   "jest": {
     "preset": "ts-jest",
@@ -19,6 +21,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@romass/backend-common": "^1.0.8",
     "@types/cookie-session": "^2.0.44",
     "@types/express": "^4.17.13",
     "@types/jsonwebtoken": "^8.5.8",
@@ -30,5 +33,6 @@
     "mongoose": "^6.2.7",
     "ts-node-dev": "^1.1.8",
     "typescript": "^4.6.2"
-  }
+  },
+  "gitHead": "5311dc442791f6a7354719a036202a1d9a57b84d"
 }

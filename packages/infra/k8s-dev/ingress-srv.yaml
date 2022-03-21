@@ -7,14 +7,14 @@ metadata:
     name: ingress-service
   annotations:
     kubernetes.io/ingress.class: "nginx"
-    nginx.ingress.kubernets.io/use-regex: "true"
+    nginx.ingress.kubernetes.io/use-regex: "true"
 spec:
   rules:
-    - host: roms.com
+    - host: roms.dev
       http:
         paths:
           - pathType: Prefix
-            path: "/api/users/?(.*)"
+            path: "/api/v1/users/?(.*)"
             backend:
               service:
                 name: auth-srv
@@ -23,7 +23,7 @@ spec:
 
           # always should be in the end
           - pathType: Prefix
-            path: /?(.*)
+            path: "/?(.*)"
             backend:
               service:
                 name: client-srv
