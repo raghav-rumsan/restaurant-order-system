@@ -2,6 +2,8 @@ import express from "express";
 import "express-async-errors";
 import { json } from "body-parser";
 import cookieSession from "cookie-session";
+import { NotFoundError } from "@romass/backend-common";
+import { signupRouter } from "./routes";
 
 const app = express();
 
@@ -16,12 +18,11 @@ app.use(
   })
 );
 
-app.get("/api/v1/users/test", (req, res) => {
-  res.send({ success: "The site is working" });
-});
+// routes
+app.use(signupRouter);
 
 app.all("*", async () => {
-  throw new Error();
+  throw new NotFoundError();
 });
 
 export { app };

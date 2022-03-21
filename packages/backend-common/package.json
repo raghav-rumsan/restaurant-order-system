@@ -1,6 +1,6 @@
 {
   "name": "@romass/backend-common",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "common package repository for  the backend of restaurant order managment system",
   "main": "./build/index.js",
   "types": "./build/index.d.ts",
@@ -29,5 +29,6 @@
     "http-status-codes": "^2.2.0",
     "jsonwebtoken": "^8.5.1",
     "node-nats-streaming": "^0.3.2"
-  }
+  },
+  "gitHead": "336cc69c4f0c8ef8a0465d05f7845f6515adbdce"
 }

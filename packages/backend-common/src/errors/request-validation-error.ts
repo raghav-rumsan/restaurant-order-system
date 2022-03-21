@@ -11,7 +11,7 @@ export class RequestValidationError extends CustomError {
   }
 
   serializeErrors(): {
-    message: ReasonPhrases;
+    message: ReasonPhrases | string;
     field?: string;
     statusCode: StatusCodes;
   }[] {
