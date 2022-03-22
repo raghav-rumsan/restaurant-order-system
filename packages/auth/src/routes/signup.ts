@@ -6,11 +6,12 @@ import { BadRequestError } from "@romass/backend-common";
 import { User } from "../models/user";
 import { StatusCodes } from "http-status-codes";
 import { validateRequest } from "@romass/backend-common";
+import { AUTH_ROUTES } from "config/routes";
 
 const router = express();
 
 router.post(
-  "/api/v1/users/signup",
+  AUTH_ROUTES.SIGN_UP,
   [
     body("email").isEmail().withMessage("Email must be valid"),
     body("password")

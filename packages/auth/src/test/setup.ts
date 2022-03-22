@@ -1,10 +1,14 @@
 import { MongoMemoryServer } from "mongodb-memory-server";
 import mongoose from "mongoose";
 import request from "supertest";
+
+import { AUTH_ROUTES } from "../config/routes";
 import { app } from "../app";
+import { adminUserToBeCreated } from "./helpers";
 
 declare global {
   function signin(): Promise<string[]>;
+  let phone: string;
 }
 
 let mongo: any;
@@ -31,11 +35,11 @@ afterAll(async () => {
 });
 
 global.signin = async () => {
-  const phone = "9865477777";
-  const password = "password";
+  const phone = adminUserToBeCreated.phone;
+  const password = adminUserToBeCreated.password;
 
   const response = await request(app)
-    .post("/api/users/signup")
+    .post(AUTH_ROUTES.SIGN_IN)
     .send({
       phone,
       password,
@@ -43,5 +47,6 @@ global.signin = async () => {
     .expect(201);
 
   const cookie = response.get("Set-Cookie");
+
   return cookie;
 };

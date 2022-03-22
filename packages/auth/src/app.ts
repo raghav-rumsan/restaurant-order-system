@@ -3,7 +3,7 @@ import "express-async-errors";
 import { json } from "body-parser";
 import cookieSession from "cookie-session";
 import { NotFoundError } from "@romass/backend-common";
-import { signupRouter } from "./routes";
+import { currentUserRouter, signupRouter, siginRouter } from "./routes";
 
 const app = express();
 
@@ -20,6 +20,8 @@ app.use(
 
 // routes
 app.use(signupRouter);
+app.use(currentUserRouter);
+app.use(siginRouter);
 
 app.all("*", async () => {
   throw new NotFoundError();

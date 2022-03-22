@@ -1,4 +1,3 @@
-import { RequestValidationError } from "@romass/backend-common";
 import mongoose from "mongoose";
 import { app } from "./app";
 
