@@ -1,6 +1,6 @@
 import express, { Request, Response } from "express";
 import { currentUser } from "@romass/backend-common";
-import { AUTH_ROUTES } from "config/routes";
+import { AUTH_ROUTES } from "../config/routes";
 
 const router = express.Router();
 

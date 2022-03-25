@@ -8,7 +8,8 @@ const createHelper = async (expectation: number) => {
 
   const response = await await request(app)
     .get(AUTH_ROUTES.SIGN_UP)
-    .send(cookie)
+    .set("Cookie", cookie)
+    .send()
     .expect(expectation);
 
   return { cookie, response };

@@ -42,7 +42,7 @@ const userSchema = new mongoose.Schema(
       required: true,
     },
     role: {
-      required: true,
+      // required: true,
       type: String,
       default: UserRoles.ADMIN,
     },

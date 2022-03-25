@@ -1,31 +1,26 @@
 import express, { Request, Response } from "express";
-import { body } from "express-validator";
+import { body, validationResult } from "express-validator";
 import jwt from "jsonwebtoken";
 
 import { BadRequestError } from "@romass/backend-common";
 import { User } from "../models/user";
 import { StatusCodes } from "http-status-codes";
 import { validateRequest } from "@romass/backend-common";
-import { AUTH_ROUTES } from "config/routes";
+import { AUTH_ROUTES } from "../config/routes";
+import { signupValidation } from "../validations";
 
 const router = express();
 
 router.post(
   AUTH_ROUTES.SIGN_UP,
-  [
-    body("email").isEmail().withMessage("Email must be valid"),
-    body("password")
-      .trim()
-      .isLength({ min: 8, max: 20 })
-      .withMessage("Password must be betwn 8 and 20"),
-    body("phone")
-      .isMobilePhone("ne-NP")
-      .withMessage("Must be a valid mobile phone number"),
-  ],
+  signupValidation,
   validateRequest,
   async (req: Request, res: Response) => {
     const { email, phone, role, password, organization, thumbnail } = req.body;
 
+    // console.log("err", validationResult(req).array());
+
+    // console.log("req.body", validationResult(req));
     const existingUser = await User.findOne({ phone });
 
     if (existingUser) {

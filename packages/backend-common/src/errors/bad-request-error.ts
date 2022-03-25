@@ -1,23 +1,15 @@
 import { CustomError } from "./custom-error";
-import { StatusCodes, ReasonPhrases } from "http-status-codes";
 
 export class BadRequestError extends CustomError {
-  statusCode: StatusCodes.BAD_REQUEST = StatusCodes.BAD_REQUEST;
-  // message: string= ReasonPhrases.BAD_REQUEST
+  statusCode = 400;
 
-  constructor(
-    public message: ReasonPhrases | string = ReasonPhrases.BAD_REQUEST
-  ) {
+  constructor(public message: string) {
     super(message);
+
+    Object.setPrototypeOf(this, BadRequestError.prototype);
   }
 
-  serializeErrors(): {
-    message: ReasonPhrases | string;
-    field?: string;
-    statusCode: StatusCodes;
-  }[] {
-    return [{ message: this.message, statusCode: this.statusCode }];
+  serializeErrors() {
+    return [{ message: this.message }];
   }
 }
-
-new BadRequestError("This is error");

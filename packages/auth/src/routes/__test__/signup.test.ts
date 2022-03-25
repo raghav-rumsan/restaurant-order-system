@@ -4,25 +4,26 @@ import {
   adminUserToBeCreated,
   createdAdminUser,
   createdSuperAdminUser,
+  superAdminUserToBeCreated,
 } from "../../test/helpers";
 import { AUTH_ROUTES } from "../../config/routes";
 
 it("returns a 201 on successful signup of admin", async () => {
-  await createdAdminUser(201);
+  await createdAdminUser(adminUserToBeCreated, 201);
 });
 
 it("return a 201 on a successful signup of super-admin", async () => {
-  await createdSuperAdminUser(201);
+  await createdSuperAdminUser(adminUserToBeCreated, 201);
 });
 
 it("sets a cookie after successful signup by admin", async () => {
-  const response = await createdAdminUser(201);
+  const response = await createdAdminUser(adminUserToBeCreated, 201);
 
   expect(response.get("Set-Cookie")).toBeDefined();
 });
 
 it("sets a cookie after successful signup by superadmin", async () => {
-  const response = await createdSuperAdminUser(201);
+  const response = await createdSuperAdminUser(superAdminUserToBeCreated, 201);
 
   expect(response.get("Set-Cookie")).toBeDefined();
 });
@@ -48,6 +49,17 @@ it("return a 400 with invalid phone", async () => {
 });
 
 it("disallow duplicate phones", async () => {
-  await createdAdminUser(201);
-  await createdAdminUser(400);
+  await createdAdminUser(adminUserToBeCreated, 201);
+  await createdAdminUser(adminUserToBeCreated, 400);
+});
+
+describe("POST /create user", () => {
+  it("checks for validity and sends the error", async () => {
+    const res = await request(app)
+      .post(AUTH_ROUTES.SIGN_UP)
+      .send({})
+      .expect(400);
+    const errors = res.body.errors;
+    expect(errors.length).not.toBe(0);
+  });
 });

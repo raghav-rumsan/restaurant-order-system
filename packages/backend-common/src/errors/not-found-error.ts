@@ -1,21 +1,15 @@
-import { ReasonPhrases, StatusCodes } from "http-status-codes";
 import { CustomError } from "./custom-error";
 
 export class NotFoundError extends CustomError {
-  statusCode: StatusCodes = StatusCodes.NOT_FOUND;
+  statusCode = 404;
 
-  constructor(
-    public message: ReasonPhrases | string = ReasonPhrases.NOT_FOUND
-  ) {
-    super(message);
+  constructor() {
+    super("Route not found");
+
     Object.setPrototypeOf(this, NotFoundError.prototype);
   }
 
-  serializeErrors(): {
-    message: ReasonPhrases | string;
-    field?: string;
-    statusCode: StatusCodes;
-  }[] {
-    return [{ message: this.message, statusCode: this.statusCode }];
+  serializeErrors() {
+    return [{ message: "Not Found" }];
   }
 }

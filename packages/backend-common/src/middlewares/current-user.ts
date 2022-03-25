@@ -1,11 +1,9 @@
 import { Request, Response, NextFunction } from "express";
 import jwt from "jsonwebtoken";
-import { UserRoles } from "../types";
 
 interface UserPayload {
   id: string;
-  phone: string;
-  role: UserRoles;
+  email: string;
 }
 
 declare global {
@@ -30,9 +28,8 @@ export const currentUser = (
       req.session.jwt,
       process.env.JWT_KEY!
     ) as UserPayload;
-
     req.currentUser = payload;
-  } catch (error) {}
+  } catch (err) {}
 
   next();
 };

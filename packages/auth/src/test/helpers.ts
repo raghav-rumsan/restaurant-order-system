@@ -21,18 +21,48 @@ export const adminUserToBeCreated: UserAttrs = {
   role: UserRoles.ADMIN,
 };
 
-export const createdSuperAdminUser = async (expectation: number) => {
+export const createdSuperAdminUser = async (data = {}, expectation: number) => {
   const res = await request(app)
     .post(AUTH_ROUTES.SIGN_UP)
-    .send(superAdminUserToBeCreated)
+    .send(data)
     .expect(expectation);
 
   return res;
 };
-export const createdAdminUser = async (expectation: number) => {
+export const createdAdminUser = async (
+  data: UserAttrs = {
+    email: "",
+    organization: "",
+    password: "",
+    phone: "",
+    superKey: "",
+    thumbnail: "",
+    role: UserRoles.ADMIN,
+  },
+  expectation: number
+) => {
   const res = await request(app)
     .post(AUTH_ROUTES.SIGN_UP)
-    .send(adminUserToBeCreated)
+    .send(data)
+    .expect(expectation);
+
+  return res;
+};
+
+export interface SignIn {
+  phone: string;
+  password: string;
+}
+
+export const siginInAdminUser = async (
+  data: SignIn = { phone: "", password: "" },
+  expectation: number
+) => {
+  const res = await request(app)
+    .post(AUTH_ROUTES.SIGN_IN)
+    .send({
+      ...data,
+    })
     .expect(expectation);
 
   return res;

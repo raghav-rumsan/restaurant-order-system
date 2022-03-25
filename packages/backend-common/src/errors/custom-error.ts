@@ -1,17 +1,11 @@
-import { StatusCodes, ReasonPhrases } from "http-status-codes";
-
 export abstract class CustomError extends Error {
-  abstract statusCode: StatusCodes;
+  abstract statusCode: number;
 
-  constructor(message: ReasonPhrases | string) {
+  constructor(message: string) {
     super(message);
 
     Object.setPrototypeOf(this, CustomError.prototype);
   }
 
-  abstract serializeErrors(): {
-    message: ReasonPhrases | string;
-    field?: string;
-    statusCode: StatusCodes;
-  }[];
+  abstract serializeErrors(): { message: string; field?: string }[];
 }

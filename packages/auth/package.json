@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "ts-node-dev src/index.ts",
-    "test": "jest --watchAll --coverage  --maxWorkers=25%",
+    "test": "jest --watchAll --no-cache --coverage  --maxWorkers=25%",
     "test:ci": "jest --runInBand",
     "docker:build": "docker build -t argahv/roms-auth .",
     "docker:push": "docker push argahv/roms-auth"
@@ -21,7 +21,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@romass/backend-common": "^0.2.1",
+    "@romass/backend-common": "^0.2.5",
     "@types/cookie-session": "^2.0.44",
     "@types/express": "^4.17.13",
     "@types/jest": "^27.4.1",

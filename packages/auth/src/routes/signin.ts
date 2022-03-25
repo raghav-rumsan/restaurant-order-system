@@ -1,10 +1,10 @@
 import { BadRequestError, validateRequest } from "@romass/backend-common";
-import { AUTH_ROUTES } from "config/routes";
+import { AUTH_ROUTES } from "../config/routes";
 import { Request, Response, Router } from "express";
 import jwt from "jsonwebtoken";
-import { User } from "models/user";
-import { Password } from "services/password";
-import { signinValidation } from "validations";
+import { User } from "../models/user";
+import { Password } from "../services/password";
+import { signinValidation } from "../validations";
 
 const router = Router();
 
@@ -13,7 +13,7 @@ router.post(
   signinValidation,
   validateRequest,
   async (req: Request, res: Response) => {
-    const { phone, password, role } = req.body;
+    const { phone, password } = req.body;
 
     const existingUser = await User.findOne({ phone });
 

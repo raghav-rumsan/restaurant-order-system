@@ -2,8 +2,13 @@ import express from "express";
 import "express-async-errors";
 import { json } from "body-parser";
 import cookieSession from "cookie-session";
-import { NotFoundError } from "@romass/backend-common";
-import { currentUserRouter, signupRouter, siginRouter } from "./routes";
+import { NotFoundError, errorHandler } from "@romass/backend-common";
+import {
+  currentUserRouter,
+  signupRouter,
+  siginRouter,
+  signOutRouter,
+} from "./routes";
 
 const app = express();
 
@@ -22,9 +27,12 @@ app.use(
 app.use(signupRouter);
 app.use(currentUserRouter);
 app.use(siginRouter);
+app.use(signOutRouter);
 
 app.all("*", async () => {
   throw new NotFoundError();
 });
+
+app.use(errorHandler);
 
 export { app };
