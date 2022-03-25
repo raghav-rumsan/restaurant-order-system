@@ -1,0 +1,37 @@
+{
+  "name": "roms",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:argahv/restaurant-order-system.git",
+  "author": "Raghav Kattel <arg.ahv7@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "@commitlint/cli": "^16.2.3",
+    "@commitlint/config-conventional": "^16.2.1",
+    "commitizen": "^4.2.4",
+    "cz-conventional-changelog": "^3.3.0",
+    "husky": "^7.0.4",
+    "lerna": "^4.0.0"
+  },
+  "private": true,
+  "workspaces": {
+    "packages": [
+      "packages/*"
+    ]
+  },
+  "scripts": {
+    "publish": "yarn lerna publish",
+    "commit": "yarn git-cz",
+    "prepare": "husky install"
+  },
+  "config": {
+    "commitizen": {
+      "path": "cz-conventional-changelog"
+    }
+  },
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
+  }
+}
