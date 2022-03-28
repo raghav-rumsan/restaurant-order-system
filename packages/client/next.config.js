@@ -1,10 +1,13 @@
+const { withFrameworkConfig } = require("./framework/config");
+
 /** @type {import('next').NextConfig} */
-const nextConfig = {
+
+const nextConfig = withFrameworkConfig({
   reactStrictMode: true,
-  webpackDevMiddleware: (config) => {
-    config.watchOptions.poll = 300;
-    return config;
+  i18n: {
+    locales: ["en-US"],
+    defaultLocale: "en-US",
   },
-};
+});
 
 module.exports = nextConfig;
